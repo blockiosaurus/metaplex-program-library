@@ -593,6 +593,7 @@ pub fn auction_bid_logic<'info>(
         AuthorityScope::Buy,
     )?;
 
+    msg!("Here 0");
     assert_valid_trade_state(
         &wallet.key(),
         &auction_house,
@@ -603,6 +604,7 @@ pub fn auction_bid_logic<'info>(
         &token_account.key(),
         trade_state_bump,
     )?;
+    msg!("Here 1");
     let auction_house_key = auction_house.key();
     let seeds = [
         PREFIX.as_bytes(),
