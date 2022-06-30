@@ -20,15 +20,13 @@ export type ExecuteSaleInstructionArgs = {
   programAsSignerBump: number;
   buyerPrice: beet.bignum;
   tokenSize: beet.bignum;
-  partialOrderSize: beet.COption<beet.bignum>;
-  partialOrderPrice: beet.COption<beet.bignum>;
 };
 /**
  * @category Instructions
  * @category ExecuteSale
  * @category generated
  */
-const executeSaleStruct = new beet.FixableBeetArgsStruct<
+const executeSaleStruct = new beet.BeetArgsStruct<
   ExecuteSaleInstructionArgs & {
     instructionDiscriminator: number[] /* size: 8 */;
   }
@@ -40,8 +38,6 @@ const executeSaleStruct = new beet.FixableBeetArgsStruct<
     ['programAsSignerBump', beet.u8],
     ['buyerPrice', beet.u64],
     ['tokenSize', beet.u64],
-    ['partialOrderSize', beet.coption(beet.u64)],
-    ['partialOrderPrice', beet.coption(beet.u64)],
   ],
   'ExecuteSaleInstructionArgs',
 );
@@ -62,7 +58,7 @@ const executeSaleStruct = new beet.FixableBeetArgsStruct<
  * @property [_writable_] auctionHouseFeeAccount
  * @property [_writable_] auctionHouseTreasury
  * @property [_writable_] buyerTradeState
- * @property [] sellerTradeState
+ * @property [_writable_] sellerTradeState
  * @property [_writable_] freeTradeState
  * @property [] programAsSigner
  * @category Instructions
@@ -202,7 +198,7 @@ export function createExecuteSaleInstruction(
     },
     {
       pubkey: sellerTradeState,
-      isWritable: false,
+      isWritable: true,
       isSigner: false,
     },
     {
