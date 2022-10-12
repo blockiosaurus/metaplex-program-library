@@ -69,6 +69,7 @@ pub fn transfer_out_of_escrow(
     }
 }
 
+// TODO: Security!!!
 pub fn process_transfer_out_of_escrow(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -87,6 +88,7 @@ pub fn process_transfer_out_of_escrow(
     let system_account_info = next_account_info(account_info_iter)?;
     let ata_program_info = next_account_info(account_info_iter)?;
     let token_program_info = next_account_info(account_info_iter)?;
+    // TODO: Remove rent and use rent variable.
     let rent_info = next_account_info(account_info_iter)?;
 
     let is_using_authority = account_info_iter.len() == 1;
@@ -106,6 +108,7 @@ pub fn process_transfer_out_of_escrow(
     let _attribute_metadata: Metadata = Metadata::from_account_info(attribute_metadata_info)?;
 
     let tm_pid = crate::id();
+    // TODO: Move into Escrow impl
     let mut escrow_seeds = vec![
         PREFIX.as_bytes(),
         tm_pid.as_ref(),

@@ -142,6 +142,7 @@ pub fn process_create_escrow_account(
         bump: bump_seed,
     };
 
+    // TODO: Code smell: Extrapolate to lib/trait
     let serialized_data = toe.try_to_vec().unwrap();
     // Create the account.
     create_or_allocate_account_raw(
@@ -154,7 +155,7 @@ pub fn process_create_escrow_account(
     )?;
 
     sol_memcpy(
-        &mut **escrow_account_info.try_borrow_mut_data().unwrap(),
+        &mut escrow_account_info.try_borrow_mut_data().unwrap(),
         &serialized_data,
         serialized_data.len(),
     );

@@ -942,6 +942,7 @@ impl EditionMarker {
     }
 }
 
+// TODO: Follow up with Thorsten about pulling this out.
 pub const ESCROW_PREFIX: &str = "escrow";
 
 #[repr(C)]
@@ -952,6 +953,7 @@ pub enum EscrowAuthority {
     Creator(Pubkey),
 }
 
+// TODO: Investigate making more thorough and generating all PDA seeds.
 impl EscrowAuthority {
     pub fn to_seeds(&self) -> Vec<&[u8]> {
         match self {
@@ -961,17 +963,18 @@ impl EscrowAuthority {
     }
 }
 
+// TODO: Rename to Escrow
 #[repr(C)]
 #[cfg_attr(feature = "serde-feature", derive(Serialize, Deserialize))]
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Eq, Debug, Clone, ShankAccount)]
-pub struct TokenOwnedEscrow {
+pub struct Escrow {
     pub key: Key,
     pub base_token: Pubkey,
     pub authority: EscrowAuthority,
     pub bump: u8,
 }
 
-impl TokenMetadataAccount for TokenOwnedEscrow {
+impl TokenMetadataAccount for Escrow {
     fn key() -> Key {
         Key::TokenOwnedEscrow
     }

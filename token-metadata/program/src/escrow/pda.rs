@@ -5,6 +5,8 @@ pub fn find_escrow_account(mint: &Pubkey, authority: &EscrowAuthority) -> (Pubke
     let id = crate::id();
     let mut seeds = vec![PREFIX.as_bytes(), id.as_ref(), mint.as_ref()];
 
+    // TODO: Switch to using iterators
+    // TODO: Look into using collect
     for seed in authority.to_seeds() {
         seeds.push(seed);
     }
